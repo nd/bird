@@ -1,0 +1,1 @@
+integral :: (Float -> Float) -> Float -> Float -> Float

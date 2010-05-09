@@ -1,0 +1,1 @@
+log :: Float -> (Float -> Float)

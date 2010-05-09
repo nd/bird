@@ -1,0 +1,14 @@
+-- succ(pred(succ(pred(pred(zero)))))
+--  
+-- succ(pred(succ(pred(pred(zero)))))
+-- ---------
+-- succ(pred(pred(zero))
+-- ---------
+-- (pred(zero))
+--  
+-- succ(pred(succ(pred(pred(zero)))))
+--      ---------
+-- succ(pred(pred(zero))
+-- ---------
+-- (pred(zero))
+

@@ -1,0 +1,4 @@
+-- (*)x = (*x) -- true
+-- (+)x = (x+) -- true
+-- (-)x = (-x) -- false (-) x = g where g y = x - y
+--                      (-x)  = g where g y = y - x
