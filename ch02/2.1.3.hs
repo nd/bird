@@ -1,2 +1,2 @@
-(==>) :: Bool -> Bool -> Bool
-x ==> y = x && not y
+(=>) :: Bool -> Bool -> Bool
+(x => y) = x && not y
