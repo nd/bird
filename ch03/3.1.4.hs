@@ -1,0 +1,1 @@
+-- 2n: n to eliminate all * and n to make all additions
