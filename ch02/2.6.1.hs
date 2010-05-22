@@ -1,0 +1,2 @@
+-- Type synonyms inherit operations from underlying type, so we can
+-- not change equality test for Distance
