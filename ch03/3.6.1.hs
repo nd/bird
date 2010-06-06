@@ -1,0 +1,4 @@
+-- Yes, second version for floor takes 2 log_2 (abs x). 
+-- First log_2 (abs x) took by lower (for negative x) or upper (for positive x).
+-- Second log_2 (abs x) took by until done improve, since improve make
+-- problem 2 times smaller every time.
