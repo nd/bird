@@ -1,0 +1,29 @@
+-- length (xs ++ ys) = length xs + length ys
+--  
+-- prove by induction on xs:
+--  
+-- xs is []:
+-- left side:
+-- length ([] ++ ys) =
+-- {first equation of ++}
+-- length ys
+-- right side:
+-- length [] + length ys =
+-- {first equation of length}
+-- 0 + length ys =
+-- {arithmetic}
+-- length ys
+--  
+-- xs is (x:xs):
+-- left side:
+-- length ((x:xs) ++ ys) = 
+-- {second equation of ++}
+-- length (x:(xs ++ ys)) =
+-- {second equation of length}
+-- 1 + length (xs ++ ys)
+-- right side:
+-- length (x:xs) + length ys = 
+-- {second equation of length}
+-- 1 + length xs + length ys
+--  
+-- and 1 + length (xs ++ ys) = 1 + length xs + length ys by induction hypothesis
