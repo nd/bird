@@ -1,0 +1,2 @@
+-- reverse xs = undefined for all infinite lists xs, because reverse xs will never terminate for such lists
+-- init xs = undefined for all infinite lists xs, where init = reverse . tail . reverse, because first applied reverse will never returns for such lists, so will init
