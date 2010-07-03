@@ -1,0 +1,40 @@
+-- concat (xss ++ yss) = concat xss ++ concat yss
+--  
+-- xss is []:
+-- left side:
+-- concat ([] ++ yss) =
+-- {first equation in ++}
+-- concat yss
+-- right side:
+-- concat [] ++ concat yss =
+-- {first equation in concat}
+-- [] ++ concat yss =
+-- {first equation in ++} =
+-- concat yss
+--  
+-- xss is undefined:
+-- left side:
+-- concat (undefined ++ yss) = 
+-- {case exhaustion}
+-- undefined
+-- right side:
+-- concat undefined ++ concat yss = 
+-- {case exhaustion in concat}
+-- undefined ++ concat yss =
+-- {case exhaustion in ++}
+-- undefined
+--  
+-- xss is (xs:xss):
+-- left side:
+-- concat ((xs:xss) ++ yss) = 
+-- {second equation in ++}
+-- concat (xs:(xss ++ yss)) = 
+-- {second equatin in concat}
+-- xs ++ concat (xss ++ yss)
+-- right side:
+-- concat (xs:xss) ++ concat yss = 
+-- {second equation in concat}
+-- (xs ++ concat xss) ++ concat yss =
+-- {++ is associative}
+-- xs ++ (concat xss ++ concat yss)
+-- left side and right side are equals by induction hypothesis
