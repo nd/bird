@@ -1,0 +1,24 @@
+-- (drop m xs) !! n == xs !! (m + n)
+--  
+-- proof by induction on m and pattern matching on xs:
+--  
+-- m is 0
+-- left side:
+-- (drop 0 xs) !! n = 
+-- {first equation of drop}
+-- xs !! n 
+-- right side:
+-- xs !! (0 + n) =
+-- {arithmetic}
+-- xs !! n
+--  
+-- m is m + 1
+-- left side:
+-- (drop (m + 1) (x:xs)) !! n =
+-- {third equation in drop}
+-- (drop m xs) !! n
+-- right side:
+-- (x:xs) !! (m + 1 + n) = 
+-- {second equation in !!} 
+-- xs !! (m + n)
+-- and (drop m xs) !! n == xs !! (m + n) by induction hypothesis
