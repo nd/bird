@@ -1,0 +1,1 @@
+-- xs ++ ys == ys ++ xs for equal lists (lists that have equal number of elements and those elements are equals)
