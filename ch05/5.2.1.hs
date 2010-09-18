@@ -1,0 +1,2 @@
+-- it was never used.. we sort Codes by id in collate, so it is safe
+-- to remove such requirement
