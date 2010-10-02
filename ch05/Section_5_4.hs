@@ -29,7 +29,7 @@ leap :: Year -> Bool
 leap y = if y `mod` 100 == 0 then (y `mod` 400 == 0) else (y `mod` 4 == 0)
 
 jan1 :: Year -> Dayname
-jan1 y = (365 * x + x `div` 4 - x `div` 100 + x `div` 400 + 1) `mod` 7
+jan1 y = (365 * x + x `div` 4 - x `div` 100 + x `div` 400) `mod` 7
     where x = y - 1
 
 -- ex. 5.4.1
@@ -96,7 +96,7 @@ pix (d, s) = map (row . rjustify 3 . pic) [1-d..42-d]
 
 heading (m, y) = banner (m, y) `above` dnames
 banner  (m, y) = row (rjustify 21 (m ++ " " ++ show y))
-dnames = row " Su Mo Tu We Th Fr Sa"
+dnames = row " Mo Tu We Th Fr Sa Su"
 
 type Picture = (Height, Width, [[Char]])
 
