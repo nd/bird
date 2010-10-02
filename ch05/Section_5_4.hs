@@ -69,8 +69,8 @@ year :: Year -> String
 year = showpic . tileWith (1,4) . group 3 . map picture . months
 
 -- ex. 5.4.2
---month :: (Month, Year) -> String
---month (m, y) = showpic . tile . group 7 . map picture . days
+month :: (Month, Year) -> String
+month (m, y) = showpic (picture (mnames !! (m-1), y, (fstdays y) !! (m-1), (mlengths y) !! (m-1)))
 
 group :: Int -> [a] -> [[a]]
 group n xs = if null xs then [] else ys:group n zs
