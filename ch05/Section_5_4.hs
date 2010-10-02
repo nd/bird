@@ -47,6 +47,9 @@ spread = foldr1 (beside)
 row :: String -> Picture
 row = spread . map pixel
 
+col :: [String] -> Picture
+col = stack . map row
+
 blank :: (Height, Width) -> Picture
 blank = stack . map row . blanks
     where blanks (h, w) = replicate h (replicate w ' ')
@@ -61,6 +64,9 @@ spreadWith w = foldr1 (#)
 
 tile :: [[Picture]] -> Picture
 tile = stack . map spread
+
+vtile :: [[Picture]] -> Picture
+vtile = spread . map stack
 
 tileWith :: (Height, Width) -> [[Picture]] -> Picture
 tileWith (h, w) = stackWith h . map (spreadWith w)
@@ -88,15 +94,20 @@ zipp4 (as, bs, cs, ds) = zip4 as bs cs ds
 
 
 picture :: (String, Year, Dayname, Int) -> Picture
-picture (m, y, d, s) = heading (m, y) `above` entries (d, s)
+picture (m, y, d, s) = heading (m, y, w) `above` body
+    where body = entries (d, s) `beside` dnames
+          w = width body
 
-entries = tile . group 7 . pix
+entries = vtile . filter (not . empty) . group 7 . pix
+    where empty = foldr spaces True 
+          spaces (_, _, str) r = str == ["   "] && r
+
 pix (d, s) = map (row . rjustify 3 . pic) [1-d..42-d]
     where pic n = if 1 <= n && n <= s then show n else ""
 
-heading (m, y) = banner (m, y) `above` dnames
+heading (m, y, w) = row (rjustify w (m ++ " " ++ show y ++ "   "))
 banner  (m, y) = row (rjustify 21 (m ++ " " ++ show y))
-dnames = row " Mo Tu We Th Fr Sa Su"
+dnames = blank (7,1) `beside` col ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 
 type Picture = (Height, Width, [[Char]])
 
