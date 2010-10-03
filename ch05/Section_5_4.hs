@@ -94,7 +94,8 @@ zipp4 (as, bs, cs, ds) = zip4 as bs cs ds
 
 
 picture :: (String, Year, Dayname, Int) -> Picture
-picture (m, y, d, s) = heading (m, y, w) `above` body
+picture (m, y, d, s) = rjustify_pic 21
+                       (heading (m, y, w) `above` body)
     where body = entries (d, s) `beside` dnames
           w = width body
 
@@ -105,7 +106,7 @@ entries = vtile . filter (not . empty) . group 7 . pix
 pix (d, s) = map (row . rjustify 3 . pic) [1-d..42-d]
     where pic n = if 1 <= n && n <= s then show n else ""
 
-heading (m, y, w) = row (rjustify w (m ++ " " ++ show y ++ "   "))
+heading (m, y, w) = row (rjustify w (m ++ " " ++ show y))
 banner  (m, y) = row (rjustify 21 (m ++ " " ++ show y))
 dnames = blank (7,1) `beside` col ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 
@@ -132,6 +133,11 @@ above, beside :: Picture -> Picture -> Picture
 
 showpic :: Picture -> String
 showpic (h, w, xss) = unlines xss
+
+rjustify_pic n pic 
+    | n > (width pic) = rjustify_pic n (blank (height pic, 1) `beside` pic)
+    | otherwise = pic
+
 
 rjustify n xs = spaces (n - length xs) ++ xs
 
