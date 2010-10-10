@@ -1,0 +1,5 @@
+-- The height of minimal binary tree for list of lenght 2^n is n.
+-- Suppose there is a minimal binary tree that divides list not in its middle, then
+-- height of this tree is 1 + (height half1 `max` height half2). 
+-- And height of one of the halves is > than log (n/2) => height of result tree >
+-- than height of the tree which divides list in the middle => contradiction.
