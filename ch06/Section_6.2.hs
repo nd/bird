@@ -31,3 +31,9 @@ sort = flatten . mkStree
 mapStree :: (Ord a) => (Ord b) => (a -> b) -> Stree a -> Stree b
 mapStree f Null = Null
 mapStree f (Fork xt x yt) = Fork (mapStree f xt) (f x) (mapStree f yt)
+
+-- ex. 6.2.3
+foldStree :: (Ord a) => (a -> b) -> (b -> b -> b -> b) -> b -> Stree a -> b
+foldStree f g e Null           = e
+foldStree f g e (Fork xt x yt) = g (foldStree f g e xt) (f x) (foldStree f g e yt)
+
