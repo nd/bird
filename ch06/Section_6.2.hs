@@ -37,3 +37,28 @@ foldStree :: (Ord a) => (a -> b) -> (b -> b -> b -> b) -> b -> Stree a -> b
 foldStree f g e Null           = e
 foldStree f g e (Fork xt x yt) = g (foldStree f g e xt) (f x) (foldStree f g e yt)
 
+insert :: (Ord a) => a -> Stree a -> Stree a
+insert x Null = Fork Null x Null
+insert x (Fork xt y yt) 
+    | (x < y) = Fork (insert x xt) y yt
+    | (x == y) = Fork xt y yt
+    | (x > y) = Fork xt y (insert x yt)
+
+delete :: (Ord a) => a -> Stree a -> Stree a
+delete x Null = Null
+delete x (Fork xt y yt) 
+    | (x < y) = Fork (delete x xt) y yt
+    | (x == y) = join xt yt
+    | (x > y) = Fork xt y (delete x yt)
+
+join :: (Ord a) => Stree a -> Stree a -> Stree a
+join xt yt = if empty yt then xt else Fork xt head tail
+             where (head, tail) = splitTree yt
+
+empty :: (Ord a) => Stree a -> Bool
+empty Null           = True
+empty (Fork xt x yt) = False
+
+splitTree :: (Ord a) => Stree a -> (a, Stree a)
+splitTree (Fork xt y yt) = if empty xt then (y, yt) else (x, Fork wt y yt)
+    where (x, wt) = splitTree xt
