@@ -10,8 +10,8 @@ merge [] ys         = ys
 merge (x:xs) []     = x:xs
 merge (x:xs) (y:ys) = if x <= y then x:merge xs (y:ys) else y:merge (x:xs) ys
 
---mkHeap :: (Ord a) => [a] -> Htree a
---mkHeap = heapify . mkHtree
+mkHeap :: (Ord a) => [a] -> Htree a
+mkHeap = heapify . mkHtree
 
 heapify :: (Ord a) => Htree a -> Htree a
 heapify Null           = Null
@@ -42,6 +42,10 @@ mkHtrees = foldr addLayer [Null]
 
 addLayer :: (Ord a) => [a] -> [Htree a] -> [Htree a]
 addLayer [] xts             = []
-addLayer (x:xs) (xt:yt:yts) = (Fork x xt yt) : (addLayer xs (yt:yts))
+addLayer (x:xs) (xt:yt:yts) = (Fork x xt yt) : (addLayer xs yts)
 addLayer (x:xs) (xt:[])     = (Fork x xt Null) : (addLayer xs [])
 addLayer (x:xs) []          = (Fork x Null Null) : (addLayer xs [])
+
+-- ex. 6.3.3
+mkHtree :: (Ord a) => [a] -> Htree a
+mkHtree = head . mkHtrees . levels
