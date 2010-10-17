@@ -1,0 +1,1 @@
+toB (infinite Rose tree will return) = undefined
