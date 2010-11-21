@@ -1,7 +1,9 @@
-module Bag (mkBag, isEmpty, union, minBag, delMin) where
+module Bag (Bag, mkBag, isEmpty, union, minBag, delMin) where
 
 data Htree a = Null | Fork Int a (Htree a) (Htree a)
                deriving (Show)
+
+type Bag a = Htree a
 
 fork :: a -> Htree a -> Htree a -> Htree a
 fork x yt zt = if m < n then Fork p x zt yt else Fork p x yt zt
@@ -41,3 +43,8 @@ mkTwo n xs
     where (xt, ys) = mkTwo m xs
           (yt, zs) = mkTwo (n - m) ys
           m        = n `div` 2
+
+--sortBag :: (Ord a) => Bag a -> [a]
+--sortBag b 
+--    | isEmpty b = []
+--    | otherwise = (minBag b) : (sortBag (delMin b))
