@@ -1,0 +1,1 @@
+Complexity of foldr insert empty would be n . log n, while complexity of mkBag is n
