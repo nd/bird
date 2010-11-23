@@ -1,0 +1,3 @@
+-- concat will not work since every element of the prps is infinite
+-- list of powers, I think we can print them all if we print all first
+-- elements, then all seconds and so on
