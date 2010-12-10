@@ -1,0 +1,1 @@
+it will print list of chars as string
