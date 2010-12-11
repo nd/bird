@@ -10,6 +10,10 @@ instance Monad Exc where
 raise :: Exception -> Exc a
 raise e = Raise e
 
+try :: Exc a -> Exc a -> Exc a
+try (Return x) b = (Return x)
+try (Raise e) b = b
+
 data Term = Con Int | Div Term Term | Try Term Term
 
 instance Show a => Show (Exc a) where
@@ -23,11 +27,7 @@ evalEx (Div t u) = do x <- evalEx t
                       if y == 0 
                          then raise "division by zero"
                          else return (x `div` y)
-evalEx (Try t u) = do f(evalEx t)
-                      where 
-                        f (Return x) = Return x
-                        f (Raise e) = do evalEx u
-                                         
+evalEx (Try t u) = do try (evalEx t) (evalEx u)
 
 
 answer, wrong :: Term
