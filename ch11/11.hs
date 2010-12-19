@@ -44,3 +44,14 @@ upper = sat Char.isUpper
 --ex. 11.1.5
 upperLower :: Parser ()
 upperLower = do {u <- upper; l <- lower; return ()}
+
+plus :: Parser a -> Parser a -> Parser a
+p `plus` q = MkP f where f s = apply p s ++ apply q s
+
+lowers :: Parser String
+lowers = do {c <- lower; cs <- lowers; return (c:cs)} `plus` return ""
+
+orelse :: Parser a -> Parser a -> Parser a
+p `orelse` q = MkP f
+               where f s = if null ps then apply q s else ps
+                           where ps = apply p s
